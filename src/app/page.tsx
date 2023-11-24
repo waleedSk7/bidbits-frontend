@@ -7,7 +7,6 @@ export default function Home() {
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
 			<div className="flex flex-col min-h-[100vh]">
-				<Navbar />
 				<main className="flex-1">
 					<section className="w-full py-12 sm:py-24 md:py-32 xl:py-48">
 						<div className="container px-4 md:px-6">
@@ -98,37 +97,6 @@ export default function Home() {
 						</div>
 					</section>
 				</main>
-				<footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-					<p className="text-xs text-zinc-500 dark:text-zinc-400">
-						© College Auctions. All rights reserved.
-					</p>
-					<nav className="sm:ml-auto flex gap-4 sm:gap-6">
-						<Link
-							className="text-xs hover:underline underline-offset-4"
-							href="#"
-						>
-							About Us
-						</Link>
-						<Link
-							className="text-xs hover:underline underline-offset-4"
-							href="#"
-						>
-							Contact
-						</Link>
-						<Link
-							className="text-xs hover:underline underline-offset-4"
-							href="#"
-						>
-							Privacy Policy
-						</Link>
-						<Link
-							className="text-xs hover:underline underline-offset-4"
-							href="#"
-						>
-							Terms of Service
-						</Link>
-					</nav>
-				</footer>
 			</div>
 		</main>
 	);

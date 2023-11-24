@@ -14,6 +14,18 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+  select{
+    background-color: rgb(var(--background-start-rgb));
+    color: rgb(var(--foreground-rgb));
+  }
+  input{
+    background-color: rgb(var(--background-start-rgb));
+    color: rgb(var(--foreground-rgb));
+  }
+  textarea{
+    background-color: rgb(var(--background-start-rgb));
+    color: rgb(var(--foreground-rgb));
+  }
 }
 
 body {
