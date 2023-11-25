@@ -1,9 +1,12 @@
+import useLogin from "@/hooks/useLogin";
+import axios from "axios";
 import Link from "next/link";
 import * as React from "react";
+import LoginButton from "./LoginButton";
 
 export interface IAppProps {}
 
-export default function Navbar(props: IAppProps) {
+export default async function Navbar(props: IAppProps) {
 	return (
 		<header className="px-4 lg:px-6 h-14 w-full flex items-center absolute top-0 left-0">
 			<Link className="flex items-center justify-center" href="#">
@@ -19,7 +22,7 @@ export default function Navbar(props: IAppProps) {
 				</Link>
 				<Link
 					className="text-sm font-medium hover:underline underline-offset-4"
-					href="#"
+					href="/products"
 				>
 					Products
 				</Link>
@@ -29,12 +32,7 @@ export default function Navbar(props: IAppProps) {
 				>
 					Categories
 				</Link>
-				<Link
-					className="text-sm font-medium hover:underline underline-offset-4"
-					href="/login"
-				>
-					Login
-				</Link>
+				<LoginButton />
 			</nav>
 		</header>
 	);

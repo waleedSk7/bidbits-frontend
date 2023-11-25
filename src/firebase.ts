@@ -16,7 +16,6 @@ const firebaseConfig = {
 	appId: process.env.NEXT_PUBLIC_appId,
 	measurementId: process.env.NEXT_PUBLIC_measurementId,
 };
-console.log(firebaseConfig);
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();

@@ -6,6 +6,7 @@ export async function POST(request: Request) {
 		const response = await axios.post(
 			process.env.backendUrl + "/api/v1/users/check?userId=" + body.userId
 		);
+
 		return Response.json({
 			login: response.data,
 		});

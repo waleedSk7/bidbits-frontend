@@ -7,6 +7,7 @@ import { uploadDirect } from "@uploadcare/upload-client";
 // fileData must be `Blob` or `File` or `Buffer`
 
 const AddProductPage: React.FC = () => {
+	const [uploading, setUploading] = useState(false);
 	const { checkLogin } = useLogin();
 	React.useEffect(() => {
 		checkLogin();
@@ -36,6 +37,7 @@ const AddProductPage: React.FC = () => {
 			categoryRef.current &&
 			imageRef.current
 		) {
+			setUploading(true);
 			const name = nameRef.current.value;
 			const description = descriptionRef.current.value;
 			const startingBid = startingBidRef.current.value;
@@ -66,6 +68,8 @@ const AddProductPage: React.FC = () => {
 				})
 				.then((res) => {
 					console.log(res.data);
+					setUploading(false);
+					window.location.href = "/products";
 				})
 				.catch((err) => {
 					console.log(err);
@@ -74,7 +78,15 @@ const AddProductPage: React.FC = () => {
 	};
 
 	return (
-		<div className="max-w-md mx-auto p-4">
+		<div className="max-w-md mx-auto p-4 py-20">
+			{uploading && (
+				<div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+					<div className="bg-white p-4 rounded-md">
+						<h1 className="text-2xl font-bold mb-4">Uploading...</h1>
+						<div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+					</div>
+				</div>
+			)}
 			<h1 className="text-2xl font-bold mb-4">Add New Product</h1>
 			<form>
 				<div className="mb-4">

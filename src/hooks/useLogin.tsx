@@ -62,27 +62,55 @@ const useLogin = () => {
 			});
 	};
 	const checkLogin = async () => {
-		const user = JSON.parse(localStorage.getItem("user") || "{}");
+		const user = localStorage.getItem("user");
 		console.log(user);
 		if (user) {
-			axios
-				.post("/api/checkLogin", {
+			try {
+				const res = await axios.post("/api/checkLogin", {
 					userId: user,
-				})
-				.then((res) => {
-					console.log(res.data.login);
-					if (res.data.login) {
-						return;
-					} else {
-						window.location.href = "/login";
-					}
-				})
-				.catch((err) => {
-					console.log(err);
 				});
+
+				console.log(res.data.login);
+				if (res.data.login) {
+					return true;
+				} else {
+					window.location.href = "/login";
+					return false;
+				}
+			} catch (err) {
+				console.log(err);
+				window.location.href = "/login";
+				return false;
+			}
+		} else {
+			window.location.href = "/login";
+			return false;
 		}
 	};
-	return { handleLogin, checkLogin };
+	const checkLoginWIthoutRedirect = async () => {
+		const user = localStorage.getItem("user");
+		console.log(user);
+		if (user) {
+			try {
+				const res = await axios.post("/api/checkLogin", {
+					userId: user,
+				});
+
+				console.log(res.data.login);
+				if (res.data.login) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (err) {
+				console.log(err);
+				return false;
+			}
+		} else {
+			return false;
+		}
+	};
+	return { handleLogin, checkLogin, checkLoginWIthoutRedirect };
 };
 
 export default useLogin;
