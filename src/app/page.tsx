@@ -76,66 +76,6 @@ export default async function Home() {
 										</div>
 									)
 								)}
-								{/* <div className="rounded-md shadow-md overflow-hidden">
-									<img
-										alt="Product"
-										className="object-cover"
-										height="300"
-										src="https://i.pcmag.com/imagery/reviews/04jlYF4fsF2M5cejiU8lw7G-2.fit_lim.size_840x473.v1685028816.jpg"
-										style={{
-											aspectRatio: "400/300",
-											objectFit: "cover",
-										}}
-										width="400"
-									/>
-									<div className="p-4">
-										<h3 className="text-lg font-bold">Product Name</h3>
-										<p className="text-sm text-gray-500 mt-2">
-											Short product description goes here.
-										</p>
-										<Button className="mt-4">View Details</Button>
-									</div>
-								</div>
-								<div className="rounded-md shadow-md overflow-hidden">
-									<img
-										alt="Product"
-										className="object-cover"
-										height="300"
-										src="https://i.pcmag.com/imagery/reviews/04jlYF4fsF2M5cejiU8lw7G-2.fit_lim.size_840x473.v1685028816.jpg"
-										style={{
-											aspectRatio: "400/300",
-											objectFit: "cover",
-										}}
-										width="400"
-									/>
-									<div className="p-4">
-										<h3 className="text-lg font-bold">Product Name</h3>
-										<p className="text-sm text-gray-500 mt-2">
-											Short product description goes here.
-										</p>
-										<Button className="mt-4">View Details</Button>
-									</div>
-								</div>
-								<div className="rounded-md shadow-md overflow-hidden">
-									<img
-										alt="Product"
-										className="object-cover"
-										height="300"
-										src="https://i.pcmag.com/imagery/reviews/04jlYF4fsF2M5cejiU8lw7G-2.fit_lim.size_840x473.v1685028816.jpg"
-										style={{
-											aspectRatio: "400/300",
-											objectFit: "cover",
-										}}
-										width="400"
-									/>
-									<div className="p-4">
-										<h3 className="text-lg font-bold">Product Name</h3>
-										<p className="text-sm text-gray-500 mt-2">
-											Short product description goes here.
-										</p>
-										<Button className="mt-4">View Details</Button>
-									</div>
-								</div> */}
 							</div>
 						</div>
 					</section>

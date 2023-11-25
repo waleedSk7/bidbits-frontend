@@ -1,16 +1,8 @@
 "use client";
+import Product from "@/Types/product";
 import { Button } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
-interface Product {
-	productId: string;
-	productName: string;
-	startingBid: number;
-	details: string;
-	image: string;
-	highestBid: number;
-}
 
 const ProductDetails = ({ params }: { params: { productId: string } }) => {
 	const [product, setProduct] = useState<Product | null>(null);
@@ -77,7 +69,7 @@ const ProductDetails = ({ params }: { params: { productId: string } }) => {
 	};
 
 	return (
-		<section className="w-full py-12 md:py-24 lg:py-32">
+		<section className="w-full py-12 md:py-24 lg:py-32 min-h-[100vh]">
 			{placeaBidPopup && (
 				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center dark:bg-white dark:bg-opacity-25">
 					<div className="bg-white p-10 rounded-md dark:bg-black">
@@ -135,7 +127,11 @@ const ProductDetails = ({ params }: { params: { productId: string } }) => {
 						Place Bid
 					</Button>
 					<p className="text-xs text-zinc-500 dark:text-zinc-400">
-						Highest Bid yet is Rs. {product.highestBid}
+						{product.highestBid !== 0 ? (
+							<>Highest Bid yet is Rs. {product.highestBid}</>
+						) : (
+							<>No one has placed a bid yet. Be the first one to bid!</>
+						)}
 					</p>
 				</div>
 			</div>

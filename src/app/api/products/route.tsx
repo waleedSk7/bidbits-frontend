@@ -3,7 +3,7 @@ import {
 	deleteFile,
 	UploadcareSimpleAuthSchema,
 } from "@uploadcare/rest-client";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: Request) => {
 	const body = await request.json();
@@ -42,7 +42,7 @@ export const POST = async (request: Request) => {
 	}
 };
 
-export const GET = async (request: Request) => {
+export const GET = async (request: NextRequest) => {
 	const products = await axios.get(
 		process.env.backendUrl + "/api/v1/products/list"
 	);

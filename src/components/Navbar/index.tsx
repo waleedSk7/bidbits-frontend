@@ -28,9 +28,9 @@ export default async function Navbar(props: IAppProps) {
 				</Link>
 				<Link
 					className="text-sm font-medium hover:underline underline-offset-4"
-					href="#"
+					href="/chat"
 				>
-					Categories
+					Messages
 				</Link>
 				<LoginButton />
 			</nav>
