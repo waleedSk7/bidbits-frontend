@@ -3,7 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function getProducts() {
-	const res = await fetch(process.env.backendUrl + "/api/v1/products/featured");
+	const res = await fetch(
+		process.env.backendUrl + "/api/v1/products/featured",
+		{
+			cache: "no-cache",
+		}
+	);
 	const data = await res.json();
 	return data;
 }
