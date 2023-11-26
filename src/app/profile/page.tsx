@@ -161,14 +161,14 @@ const ProfilePage: React.FC = () => {
 			{user && (
 				<div className="flex flex-col items-center justify-center w-full">
 					<div className="container px-4 md:px-6">
-						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+						<div className="grid grid-cols-1 lg:grid-cols-1 gap-4">
 							<div className="card border rounded-lg overflow-hidden">
 								<div className="p-6 space-y-2">
 									<h3 className="text-lg font-semibold">Edit Profile</h3>
 									<p className="text-sm text-zinc-500 dark:text-zinc-400">
 										Edit your profile here.
 									</p>
-									<div className="flex items-center gap-10 max-h-fit overflow-x-scroll max-w-full">
+									<div className="flex flex-col sm:flex-row items-center gap-10 max-h-fit overflow-x-scroll max-w-full">
 										<div className="card border rounded-lg overflow-hidden">
 											<div className="p-6 space-y-2">
 												<h3 className="text-lg font-semibold">
@@ -207,7 +207,7 @@ const ProfilePage: React.FC = () => {
             */}
 			<div className="flex flex-col items-center justify-center w-full">
 				<div className="container px-4 md:px-6">
-					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+					<div className="grid grid-cols-1  lg:grid-cols-1 gap-4">
 						<div className="card border rounded-lg overflow-hidden">
 							<div className="p-6 space-y-2">
 								<h3 className="text-lg font-semibold">Products</h3>
