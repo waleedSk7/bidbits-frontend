@@ -19,37 +19,46 @@ export default function Products(props: IProductsProps) {
 		getProducts();
 	}, []);
 	return (
-		<div className="flex flex-col items-center justify-center h-screen min-h-[100vh]">
-			<main className="flex-1">
-				<section className="w-full py-12 md:py-24 lg:py-32">
-					<div className="container px-4 md:px-6">
-						<div className="flex flex-col items-center space-y-4 text-center">
-							<div className="space-y-2">
-								<h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-									Our Products
-								</h1>
-								<p className="mx-auto max-w-[700px] text-zinc-500 md:text-xl dark:text-zinc-400">
-									Explore the wide variety of products available for auction
-									within your college community.
-								</p>
-							</div>
+		<div>
+			<section className="w-full py-24 md:py-24 lg:py-32 flex justify-center">
+				<div className="container px-4 md:px-6">
+					<div className="flex flex-col items-center space-y-4 text-center">
+						<div className="space-y-2">
+							<h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
+								Our Products
+							</h1>
+							<p className="mx-auto max-w-[700px] text-zinc-500 md:text-xl dark:text-zinc-400">
+								Explore the wide variety of products available for auction
+								within your college community.
+							</p>
 						</div>
 					</div>
-				</section>
-				<section className="w-full py-12 md:py-24 lg:py-32">
-					<div className="container px-4 md:px-6">
-						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-							{products.map((product: any) => (
-								<ProductCard
-									details
-									product={product}
-									key={product.productId}
-								/>
-							))}
-						</div>
+				</div>
+			</section>
+			<section className="w-full py-12 md:py-24 lg:py-32">
+				<div className="flex w-screen">
+					<div className="flex flex-wrap overflow-hidden w-full gap-10 justify-center">
+						{products.map((product: any) => (
+							<ProductCard details product={product} key={product.productId} />
+						))}
+						{products.map((product: any) => (
+							<ProductCard details product={product} key={product.productId} />
+						))}
+						{products.map((product: any) => (
+							<ProductCard details product={product} key={product.productId} />
+						))}
+						{products.map((product: any) => (
+							<ProductCard details product={product} key={product.productId} />
+						))}
+						{products.map((product: any) => (
+							<ProductCard details product={product} key={product.productId} />
+						))}
+						{products.map((product: any) => (
+							<ProductCard details product={product} key={product.productId} />
+						))}
 					</div>
-				</section>
-			</main>
+				</div>
+			</section>
 		</div>
 	);
 }
