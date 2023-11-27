@@ -1,9 +1,35 @@
 "use client";
+import Message from "@/Types/message";
+import Product from "@/Types/product";
 import useLogin from "@/hooks/useLogin";
 import { Button, Card, CardContent, Input } from "@mui/material";
+import React from "react";
 
 export default function Chat() {
 	const { checkLogin } = useLogin();
+	const [products, setProducts] = React.useState<Product[]>([]);
+	const [selectedProduct, setSelectedProduct] = React.useState<Product | null>(
+		null
+	);
+	const [messages, setMessages] = React.useState<Message[]>([]);
+	const fetchMessages = async () => {
+		const res = await fetch("/api/chats/user/" + localStorage.getItem("user"), {
+			cache: "no-cache",
+		});
+		const data = await res.json();
+		console.log(data);
+		setProducts(data.products);
+	};
+	React.useEffect(() => {
+		checkLogin();
+		fetchMessages();
+	}, []);
+	React.useEffect(() => {
+		if (selectedProduct) {
+			if (selectedProduct.messages) setMessages(selectedProduct.messages);
+			console.log(selectedProduct.messages);
+		}
+	}, [selectedProduct]);
 
 	return (
 		<div key="1" className="flex h-screen bg-white dark:bg-zinc-800">
@@ -21,24 +47,46 @@ export default function Chat() {
 						<Button className="absolute right-2.5 top-3" />
 					</div>
 					<div className="space-y-2">
-						<Card className="p-2">
-							<CardContent>
-								<h3 className="font-semibold">Contact Name</h3>
-								<p className="text-xs text-zinc-500 dark:text-zinc-400">
-									Last message...
-								</p>
-							</CardContent>
-						</Card>
+						{products.map((product: Product) => (
+							<Card className="p-2" key={product.productId}>
+								<CardContent
+									onClick={() => {
+										setSelectedProduct(product);
+									}}
+								>
+									<h3 className="font-semibold">{product.productName}</h3>
+									<p className="text-xs text-zinc-500 dark:text-zinc-400">
+										{product.details}
+									</p>
+								</CardContent>
+							</Card>
+						))}
 					</div>
 				</div>
 			</aside>
 			<section className="flex flex-col w-full">
 				<header className="border-b dark:border-zinc-700 p-4">
-					<h2 className="text-xl font-bold">Contact Name</h2>
+					<h2 className="text-xl font-bold">
+						{selectedProduct ? selectedProduct.productName : ""}
+					</h2>
 				</header>
 				<main className="flex-1 overflow-auto p-4">
 					<div className="space-y-4">
-						<div className="flex items-end gap-2">
+						{messages.map((message: Message) => (
+							<div
+								key={message.messageId}
+								className={`flex items-end gap-2 ${
+									message.sender.id == Number(localStorage.getItem("user"))
+										? ""
+										: "justify-end"
+								}`}
+							>
+								<div className="rounded-lg bg-zinc-200 dark:bg-zinc-700 p-2">
+									<p className="text-sm">{message.message}</p>
+								</div>
+							</div>
+						))}
+						{/* <div className="flex items-end gap-2">
 							<div className="rounded-lg bg-zinc-200 dark:bg-zinc-700 p-2">
 								<p className="text-sm">Hello, how are you?</p>
 							</div>
@@ -47,7 +95,7 @@ export default function Chat() {
 							<div className="rounded-lg bg-blue-500 text-white p-2">
 								<p className="text-sm">I'm fine, thanks for asking!</p>
 							</div>
-						</div>
+						</div> */}
 					</div>
 				</main>
 				<footer className="border-t dark:border-zinc-700 p-4">

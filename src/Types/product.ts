@@ -1,3 +1,5 @@
+import Message from "./message";
+
 export default interface Product {
 	productId: string;
 	productName: string;
@@ -5,4 +7,5 @@ export default interface Product {
 	details: string;
 	image: string;
 	highestBid: number;
+	messages?: Message[];
 }

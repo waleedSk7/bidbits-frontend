@@ -1,4 +1,5 @@
 "use client";
+import User from "@/Types/user";
 import ProductCard from "@/components/ProductCard";
 import useLogin from "@/hooks/useLogin";
 import Image from "next/image";
@@ -11,12 +12,7 @@ const ProfilePage: React.FC = () => {
 	);
 	const [editValue, setEditValue] = React.useState("");
 	const [chats, setChats] = React.useState([]);
-	const [user, setUser] = React.useState<{
-		name: string;
-		email: string;
-		hostel: string;
-		campusID: string;
-	} | null>(null);
+	const [user, setUser] = React.useState<User | null>(null);
 
 	const { checkLogin } = useLogin();
 

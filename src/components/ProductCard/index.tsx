@@ -6,9 +6,11 @@ import Link from "next/link";
 export default function ProductCard({
 	product,
 	details,
+	chat,
 }: {
 	product: Product;
 	details?: boolean;
+	chat?: boolean;
 }) {
 	return (
 		<div
@@ -37,6 +39,13 @@ export default function ProductCard({
 					<p className="mt-9">
 						<Link href={`/products/${product.productId}`}>
 							<Button className="">View Details</Button>
+						</Link>
+					</p>
+				)}
+				{chat && (
+					<p className="mt-9">
+						<Link href={`/chat/${product.productId}`}>
+							<Button className="">Chat with Highest Bidder</Button>
 						</Link>
 					</p>
 				)}
