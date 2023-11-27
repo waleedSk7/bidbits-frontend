@@ -5,8 +5,7 @@ import * as React from "react";
 export interface IChatWithHigestBidderProps {
 	params: { productId: string };
 }
-
-export async function getProductDataAndMessages(productId: string) {
+async function getProductDataAndMessages(productId: string) {
 	const productRes = await fetch(`/api/products/${productId}`);
 	const product = await productRes.json();
 	const messagesRes = await fetch(`/api/chats/product/${productId}`);

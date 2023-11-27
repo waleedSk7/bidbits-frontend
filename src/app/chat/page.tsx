@@ -12,6 +12,7 @@ export default function Chat() {
 		null
 	);
 	const [messages, setMessages] = React.useState<Message[]>([]);
+	const [message, setMessage] = React.useState("");
 	const fetchMessages = async () => {
 		const res = await fetch("/api/chats/user/" + localStorage.getItem("user"), {
 			cache: "no-cache",
@@ -29,7 +30,27 @@ export default function Chat() {
 			if (selectedProduct.messages) setMessages(selectedProduct.messages);
 			console.log(selectedProduct.messages);
 		}
-	}, [selectedProduct]);
+	}, [selectedProduct, products]);
+
+	const handleSend = async () => {
+		if (!selectedProduct) {
+			return;
+		}
+		if (!message) {
+			return;
+		}
+		const res = await fetch("/api/chats/user/" + localStorage.getItem("user"), {
+			method: "POST",
+			body: JSON.stringify({
+				productId: selectedProduct.productId,
+				message: message,
+				receiverId: selectedProduct.user.userId,
+			}),
+			cache: "no-cache",
+		});
+		setMessage("");
+		fetchMessages();
+	};
 
 	return (
 		<div key="1" className="flex h-screen bg-white dark:bg-zinc-800">
@@ -76,9 +97,9 @@ export default function Chat() {
 							<div
 								key={message.messageId}
 								className={`flex items-end gap-2 ${
-									message.sender.id == Number(localStorage.getItem("user"))
-										? ""
-										: "justify-end"
+									message.sender.userId == Number(localStorage.getItem("user"))
+										? "justify-end"
+										: ""
 								}`}
 							>
 								<div className="rounded-lg bg-zinc-200 dark:bg-zinc-700 p-2">
@@ -103,8 +124,13 @@ export default function Chat() {
 						<Button>
 							<IconEmojiHappy className="w-6 h-6" />
 						</Button>
-						<Input className="flex-1" placeholder="Type a message..." />
-						<Button>Send</Button>
+						<Input
+							value={message}
+							onChange={(e) => setMessage(e.target.value)}
+							className="flex-1"
+							placeholder="Type a message..."
+						/>
+						<Button onClick={handleSend}>Send</Button>
 					</div>
 				</footer>
 			</section>
