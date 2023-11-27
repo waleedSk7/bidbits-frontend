@@ -100,7 +100,7 @@ const ProductDetails = ({ params }: { params: { productId: string } }) => {
 					</div>
 				</div>
 			)}
-			<div className="container flex items-start gap-8 px-4 md:px-6">
+			<div className="container flex flex-col md:flex-row items-start gap-8 px-4 md:px-6 ">
 				<img
 					alt="Sneaker Image"
 					className="aspect-[1/1] object-cover object-center"

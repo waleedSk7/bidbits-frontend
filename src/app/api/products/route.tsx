@@ -4,6 +4,7 @@ import {
 	UploadcareSimpleAuthSchema,
 } from "@uploadcare/rest-client";
 import { NextRequest, NextResponse } from "next/server";
+import Product from "@/Types/product";
 
 export const POST = async (request: Request) => {
 	const body = await request.json();
@@ -50,4 +51,34 @@ export const GET = async (request: NextRequest) => {
 	return Response.json({
 		products: products.data,
 	});
+};
+
+export const PUT = async (request: NextRequest) => {
+	const body = await request.json();
+
+	const { userId, productId } = body;
+
+	try {
+		const bids = await axios.get(process.env.backendUrl + "/api/v1/bids/");
+		const bidId = bids.data.find(
+			(bid: any) => bid.product.productId == productId
+		).bidId;
+		console.log(bidId);
+
+		const res = await axios.post(
+			process.env.backendUrl +
+				"/api/v1/bids/freezeBid?userId=" +
+				userId +
+				"&bidId=" +
+				bidId
+		);
+		return Response.json({
+			message: res.data,
+		});
+	} catch (err: any) {
+		console.log(err);
+		return NextResponse.json({
+			message: err,
+		});
+	}
 };

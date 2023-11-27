@@ -7,7 +7,10 @@ export default interface Product {
 	startingBid: number;
 	details: string;
 	image: string;
+	category: string;
 	highestBid: number;
 	messages?: Message[];
 	user: User;
+
+	sold: boolean;
 }

@@ -3,14 +3,15 @@ import Message from "@/Types/message";
 import Product from "@/Types/product";
 import useLogin from "@/hooks/useLogin";
 import { Button, Card, CardContent, Input } from "@mui/material";
-import React from "react";
+import React, { useMemo } from "react";
 
 export default function Chat() {
 	const { checkLogin } = useLogin();
 	const [products, setProducts] = React.useState<Product[]>([]);
-	const [selectedProduct, setSelectedProduct] = React.useState<Product | null>(
-		null
-	);
+	const [selectedId, setSelectedId] = React.useState<number | null>(null);
+	const selectedProduct = useMemo(() => {
+		return products.find((product) => Number(product.productId) === selectedId);
+	}, [selectedId, products]);
 	const [messages, setMessages] = React.useState<Message[]>([]);
 	const [message, setMessage] = React.useState("");
 	const fetchMessages = async () => {
@@ -20,6 +21,7 @@ export default function Chat() {
 		const data = await res.json();
 		console.log(data);
 		setProducts(data.products);
+		return products;
 	};
 	React.useEffect(() => {
 		checkLogin();
@@ -49,7 +51,7 @@ export default function Chat() {
 			cache: "no-cache",
 		});
 		setMessage("");
-		fetchMessages();
+		await fetchMessages();
 	};
 
 	return (
@@ -72,7 +74,7 @@ export default function Chat() {
 							<Card className="p-2" key={product.productId}>
 								<CardContent
 									onClick={() => {
-										setSelectedProduct(product);
+										setSelectedId(Number(product.productId));
 									}}
 								>
 									<h3 className="font-semibold">{product.productName}</h3>

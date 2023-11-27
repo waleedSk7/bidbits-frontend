@@ -1,5 +1,8 @@
 "use client";
+import ProfileChat from "@/Types/ProfileChat";
+import Product from "@/Types/product";
 import User from "@/Types/user";
+import ChatCardProfile from "@/components/ChatCard";
 import ProductCard from "@/components/ProductCard";
 import useLogin from "@/hooks/useLogin";
 import Image from "next/image";
@@ -11,7 +14,7 @@ const ProfilePage: React.FC = () => {
 		null
 	);
 	const [editValue, setEditValue] = React.useState("");
-	const [chats, setChats] = React.useState([]);
+	const [chats, setChats] = React.useState<ProfileChat[]>([]);
 	const [user, setUser] = React.useState<User | null>(null);
 
 	const { checkLogin } = useLogin();
@@ -37,15 +40,23 @@ const ProfilePage: React.FC = () => {
 		const data = await res.json();
 		console.log(data);
 		setProducts(data.products);
+		getChats(data.products);
 	};
 
-	const getChats = async () => {
-		const res = await fetch("/api/chats/user/" + localStorage.getItem("user"), {
-			cache: "no-cache",
-		});
-		const data = await res.json();
-		console.log(data);
-		setChats(data.chats);
+	const getChats = async (products: Product[]) => {
+		const chats = [];
+		for (const product of products) {
+			const res = await fetch("/api/chats/seller/" + product.productId, {
+				cache: "no-cache",
+			});
+			const data = await res.json();
+			chats.push({
+				...data,
+				product,
+			});
+		}
+		setChats(chats);
+		console.log(chats);
 	};
 
 	const handleEdit = (type: "id" | "hostel") => {
@@ -112,7 +123,7 @@ const ProfilePage: React.FC = () => {
 							<input
 								type="text"
 								placeholder={editShown.toLocaleUpperCase()}
-								value={editShown === "id" ? user?.campusID : user?.hostel}
+								value={editValue}
 								onChange={(e) => setEditValue(e.target.value)}
 								className="border rounded-md p-2"
 							/>
@@ -234,22 +245,7 @@ const ProfilePage: React.FC = () => {
 									<div className="flex items-center gap-10 max-h-fit overflow-x-scroll max-w-full">
 										{chats.length > 0 ? (
 											chats.map((chat: any) => (
-												<div className="card border rounded-lg overflow-hidden">
-													<Image
-														src={
-															"https://ucarecdn.com/" + chat.product.image + "/"
-														}
-														width={400}
-														height={300}
-														className="object-cover"
-														alt="Product"
-													/>
-													<div className="p-6 space-y-2">
-														<h3 className="text-lg font-semibold">
-															{chat.product.productName}
-														</h3>
-													</div>
-												</div>
+												<ChatCardProfile chat={chat} key={chat.chatId} />
 											))
 										) : (
 											<div className="p-6 space-y-2">

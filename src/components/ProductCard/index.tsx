@@ -35,13 +35,14 @@ export default function ProductCard({
 				<p className="text-sm text-gray-500 mt-2">
 					Starting Bid: Rs. {product.startingBid}
 				</p>
-				{details && (
+				{!product.sold && details && (
 					<p className="mt-9">
 						<Link href={`/products/${product.productId}`}>
 							<Button className="">View Details</Button>
 						</Link>
 					</p>
 				)}
+				{product.sold && "SOLD"}
 				{chat && (
 					<p className="mt-9">
 						<Link href={`/chat/${product.productId}`}>
