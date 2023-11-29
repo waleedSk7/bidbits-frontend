@@ -23,7 +23,7 @@ export default function ChatCardProfile(props: IChatCardProfileProps) {
 				<div className="flex-1">
 					<h3 className="text-lg font-semibold">{chat.product.productName}</h3>
 					<p className="text-sm text-zinc-500 dark:text-zinc-400">
-						{chat.messages.length > 0 && chat.messages[0].message}
+						{chat.messages && chat.messages.length > 0 && chat.messages[0].message}
 					</p>
 				</div>
 				<div className="flex flex-col items-end">
