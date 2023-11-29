@@ -26,16 +26,17 @@ export default function Chat() {
 	React.useEffect(() => {
 		checkLogin();
 		fetchMessages();
+		const interval = setInterval(() => {
+			fetchMessages();
+		}, 5000);
+		return () => clearInterval(interval);
 	}, []);
 	React.useEffect(() => {
 		if (selectedProduct) {
 			if (selectedProduct.messages) setMessages(selectedProduct.messages);
 			console.log(selectedProduct.messages);
 		}
-		const interval = setInterval(() => {
-			fetchMessages();
-		}, 10000);
-		return () => clearInterval(interval);
+		
 	}, [selectedProduct, products]);
 
 	const handleSend = async (e: any) => {

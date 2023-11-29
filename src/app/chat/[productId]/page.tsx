@@ -46,7 +46,7 @@ export default function ChatWithHigestBidder(
 		fetchMessages();
 		const interval = setInterval(() => {
 			fetchMessages();
-		}, 10000);
+		}, 5000);
 		return () => clearInterval(interval);
 	}, []);
 	React.useEffect(() => {
