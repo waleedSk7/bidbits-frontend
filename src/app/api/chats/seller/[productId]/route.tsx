@@ -25,7 +25,12 @@ export async function GET(
 		console.log({ highestBid, messages });
 		return Response.json({
 			highestBid: highestBid,
-			messages: messages,
+			messages: messages.sort((a, b) => {
+				return (
+					new Date(a.timestamp.toString()).getTime() -
+					new Date(b.timestamp.toString()).getTime()
+				);
+			}),
 			bidder: bidder,
 		});
 
