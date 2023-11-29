@@ -1,5 +1,6 @@
 "use client";
 import Product from "@/Types/product";
+import { Message } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -68,6 +69,30 @@ const ProductDetails = ({ params }: { params: { productId: string } }) => {
 		}
 	};
 
+	const handleChatWithSeller = async () => {
+		// Replace this with your actual API call
+		try {
+			const response = await axios.post(
+				`/api/chats/user/${localStorage.getItem("user")}`,
+				{
+					productId: product.productId,
+					message:
+						"Hi Anonymous seller, I am interested in viewing this product.",
+					receiverId: product.user.userId,
+				}
+			);
+			const data = await response.data;
+			if (data.error) {
+				alert(data.error);
+				return;
+			}
+			alert("Sent a hi message to the seller");
+			window.location.href = "/chat";
+		} catch (error) {
+			console.error("Error placing chat:", error);
+		}
+	};
+
 	return (
 		<section className="w-full py-12 md:py-24 lg:py-32 min-h-[100vh]">
 			{placeaBidPopup && (
@@ -109,8 +134,11 @@ const ProductDetails = ({ params }: { params: { productId: string } }) => {
 					width="500"
 				/>
 				<div className="space-y-6">
-					<h1 className="text-4xl font-bold tracking-tighter">
-						{product.productName}
+					<h1 className="text-4xl font-bold tracking-tighter flex justify-between">
+						{product.productName}{" "}
+						<Button className="ml-4" onClick={handleChatWithSeller}>
+							<Message /> Chat with seller
+						</Button>
 					</h1>
 					<p className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">
 						Starting Bid: {product.startingBid}

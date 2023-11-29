@@ -84,7 +84,7 @@ const AddProductPage: React.FC = () => {
 	};
 
 	return (
-		<div className="max-w-md mx-auto p-4 py-20 min-h-[100vh]">
+		<div className="max-w-md mx-auto p-4 py-20 min-h-[100vh] fixed">
 			{uploading && (
 				<div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
 					<div className="bg-white p-4 rounded-md">

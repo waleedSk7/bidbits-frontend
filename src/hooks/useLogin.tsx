@@ -19,36 +19,36 @@ const useLogin = () => {
 				}
 
 				// check if email starts with f and ends with @hyderabad.bits-pilani.ac.in
-				if (
-					email.startsWith("f") &&
-					email.endsWith("@hyderabad.bits-pilani.ac.in")
-				) {
-					axios
-						.post("/api/login", {
-							email: email,
-							name: user.displayName,
-							photoURL: user.photoURL,
-							uid: user.uid,
-						})
-						.then((res) => {
-							console.log(res.data.login);
-							if (res.data.login) {
-								window.location.href = "/products";
-								localStorage.setItem(
-									"user",
-									JSON.stringify(res.data.login.userId)
-								);
-							} else {
-								window.location.href = "/login";
-								alert("Login Failed");
-							}
-						})
-						.catch((err) => {
-							console.log(err);
-						});
-				} else {
-					// show error message
-				}
+				// if (
+				// 	email.startsWith("f") &&
+				// 	email.endsWith("@hyderabad.bits-pilani.ac.in")
+				// ) {
+				axios
+					.post("/api/login", {
+						email: email,
+						name: user.displayName,
+						photoURL: user.photoURL,
+						uid: user.uid,
+					})
+					.then((res) => {
+						console.log(res.data.login);
+						if (res.data.login) {
+							window.location.href = "/products";
+							localStorage.setItem(
+								"user",
+								JSON.stringify(res.data.login.userId)
+							);
+						} else {
+							window.location.href = "/login";
+							alert("Login Failed");
+						}
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+				// } else {
+				// 	// show error message
+				// }
 			})
 			.catch((error) => {
 				// Handle Errors here.
