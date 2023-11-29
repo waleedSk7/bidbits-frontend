@@ -71,7 +71,7 @@ const ProductDetails = ({ params }: { params: { productId: string } }) => {
 	return (
 		<section className="w-full py-12 md:py-24 lg:py-32 min-h-[100vh]">
 			{placeaBidPopup && (
-				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center dark:bg-white dark:bg-opacity-25">
+				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center dark:bg-white dark:bg-opacity-25 z-50">
 					<div className="bg-white p-10 rounded-md dark:bg-black">
 						<h1 className="text-2xl font-bold mb-4">Place a Bid</h1>
 						<div className="flex flex-col gap-4">

@@ -1,7 +1,6 @@
 "use client";
 import ProfileChat from "@/Types/ProfileChat";
 import Message from "@/Types/message";
-import Product from "@/Types/product";
 import IconEmojiHappy from "@/components/IconEmojiHappy";
 import useLogin from "@/hooks/useLogin";
 import { Button, Input } from "@mui/material";

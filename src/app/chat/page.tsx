@@ -90,7 +90,11 @@ export default function Chat() {
 			<section className="flex flex-col w-full">
 				<header className="border-b dark:border-zinc-700 p-4">
 					<h2 className="text-xl font-bold">
-						{selectedProduct ? selectedProduct.productName : ""}
+						{selectedProduct
+							? selectedProduct.sold
+								? selectedProduct.user.name
+								: selectedProduct.productName
+							: ""}
 					</h2>
 				</header>
 				<main className="flex-1 overflow-auto p-4">
