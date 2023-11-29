@@ -44,6 +44,10 @@ export default function ChatWithHigestBidder(
 	React.useEffect(() => {
 		checkLogin();
 		fetchMessages();
+		const interval = setInterval(() => {
+			fetchMessages();
+		}, 10000);
+		return () => clearInterval(interval);
 	}, []);
 	React.useEffect(() => {
 		console.log(chatProfile);
@@ -67,7 +71,8 @@ export default function ChatWithHigestBidder(
 		}
 	};
 
-	const handleSend = async () => {
+	const handleSend = async (e: any) => {
+		e.preventDefault();
 		if (!chatProfile) {
 			return;
 		}
@@ -122,18 +127,19 @@ export default function ChatWithHigestBidder(
 					</div>
 				</main>
 				<footer className="border-t dark:border-zinc-700 p-4">
-					<div className="flex items-center gap-2">
+					<form className="flex items-center gap-2" onSubmit={handleSend}>
 						<Button>
 							<IconEmojiHappy className="w-6 h-6" />
 						</Button>
 						<Input
+							onSubmit={handleSend}
 							value={message}
 							onChange={(e) => setMessage(e.target.value)}
 							className="flex-1"
 							placeholder="Type a message..."
 						/>
 						<Button onClick={handleSend}>Send</Button>
-					</div>
+					</form>
 				</footer>
 			</section>
 		</main>

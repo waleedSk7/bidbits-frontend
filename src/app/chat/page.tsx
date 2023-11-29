@@ -32,9 +32,14 @@ export default function Chat() {
 			if (selectedProduct.messages) setMessages(selectedProduct.messages);
 			console.log(selectedProduct.messages);
 		}
+		const interval = setInterval(() => {
+			fetchMessages();
+		}, 10000);
+		return () => clearInterval(interval);
 	}, [selectedProduct, products]);
 
-	const handleSend = async () => {
+	const handleSend = async (e: any) => {
+		e.preventDefault();
 		if (!selectedProduct) {
 			return;
 		}
@@ -126,7 +131,7 @@ export default function Chat() {
 					</div>
 				</main>
 				<footer className="border-t dark:border-zinc-700 p-4">
-					<div className="flex items-center gap-2">
+					<form className="flex items-center gap-2" onSubmit={handleSend}>
 						<Button>
 							<IconEmojiHappy className="w-6 h-6" />
 						</Button>
@@ -135,9 +140,10 @@ export default function Chat() {
 							onChange={(e) => setMessage(e.target.value)}
 							className="flex-1"
 							placeholder="Type a message..."
+							onSubmit={handleSend}
 						/>
 						<Button onClick={handleSend}>Send</Button>
-					</div>
+					</form>
 				</footer>
 			</section>
 		</div>
