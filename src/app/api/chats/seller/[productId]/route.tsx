@@ -1,6 +1,7 @@
 import axios from "axios";
 import Product from "@/Types/product";
 import Message from "@/Types/message";
+import User from "@/Types/user";
 export async function GET(
 	request: Request,
 	{ params }: { params: { productId: string } }
@@ -9,11 +10,12 @@ export async function GET(
 	console.log(productId);
 	try {
 		const {
-			data: { highestBid, messages },
+			data: { highestBid, messages, bidder },
 		}: {
 			data: {
 				highestBid: number;
 				messages: Message[];
+				bidder: User;
 			};
 		} = await axios.get(
 			process.env.backendUrl +
@@ -24,6 +26,7 @@ export async function GET(
 		return Response.json({
 			highestBid: highestBid,
 			messages: messages,
+			bidder: bidder,
 		});
 
 		// for (const product of products) {

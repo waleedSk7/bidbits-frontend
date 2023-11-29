@@ -28,8 +28,8 @@ export default function ChatWithHigestBidder(
 		const res = await fetch("/api/chats/seller/" + props.params.productId, {
 			cache: "no-cache",
 		});
-		const { highestBid, messages } = await res.json();
-		console.log({ highestBid, messages });
+		const { highestBid, messages, bidder } = await res.json();
+		console.log({ highestBid, messages, bidder });
 
 		const response = await axios.get(`/api/products/${props.params.productId}`);
 		const { product } = await response.data;
@@ -38,6 +38,7 @@ export default function ChatWithHigestBidder(
 			product: product,
 			highestBid: highestBid,
 			messages: messages,
+			bidder: bidder,
 		});
 	};
 	React.useEffect(() => {
@@ -78,7 +79,7 @@ export default function ChatWithHigestBidder(
 			body: JSON.stringify({
 				productId: chatProfile.product.productId,
 				message: message,
-				receiverId: chatProfile.product.user.userId,
+				receiverId: chatProfile.bidder.userId,
 			}),
 			cache: "no-cache",
 		});
