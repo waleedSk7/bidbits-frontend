@@ -95,8 +95,8 @@ export default function Chat() {
 					</div>
 				</div>
 			</aside>
-			<section className="flex flex-col w-full">
-				<header className="border-b dark:border-zinc-700 p-4">
+			<section className="flex flex-col w-full ">
+				<header className="border-b dark:border-zinc-700 p-4 z-10 text-white">
 					<h2 className="text-xl font-bold">
 						{selectedProduct
 							? selectedProduct.sold
@@ -121,6 +121,14 @@ export default function Chat() {
 								</div>
 							</div>
 						))}
+						{selectedProduct && selectedProduct.sold && (
+							<div className="flex flex-col w-full justify-center items-center">
+								<span>Name: {selectedProduct.user.name}</span>
+								<span>Email: {selectedProduct.user.email}</span>
+								<span>Phone: {selectedProduct.user.phone}</span>
+								<span>Hostel: {selectedProduct.user.hostel}</span>{" "}
+							</div>
+						)}
 						{/* <div className="flex items-end gap-2">
 							<div className="rounded-lg bg-zinc-200 dark:bg-zinc-700 p-2">
 								<p className="text-sm">Hello, how are you?</p>

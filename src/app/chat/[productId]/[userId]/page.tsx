@@ -1,6 +1,7 @@
 "use client";
 import ProfileChat from "@/Types/ProfileChat";
 import Message from "@/Types/message";
+import User from "@/Types/user";
 import IconEmojiHappy from "@/components/IconEmojiHappy";
 import useLogin from "@/hooks/useLogin";
 import { Button, Input } from "@mui/material";
@@ -27,6 +28,7 @@ export default function ChatWithHigestBidder(
 		product: ProfileChat["product"];
 		bid: number;
 	} | null>();
+	const [frozenUser, setFrozenUser] = React.useState<User | null>(null);
 	const [message, setMessage] = React.useState("");
 	const fetchMessages = async () => {
 		const res = await fetch("/api/chats/seller/" + props.params.productId, {
@@ -36,10 +38,16 @@ export default function ChatWithHigestBidder(
 			(res) => res.json()
 		);
 		let bidByUser = 0;
-		if (bids.find((bid: any) => bid.product.productId == props.params.productId)) {
+		const bid = bids.find(
+			(bid: any) => bid.product.productId == props.params.productId
+		);
+		if (bid) {
 			bidByUser = bids.find(
 				(bid: any) => bid.product.productId == props.params.productId
 			).bid;
+			if (bid.frozen) {
+				setFrozenUser(bid.user);
+			}
 		}
 
 		const { userMessages }: { userMessages: ProfileChat["userMessages"] } =
@@ -53,6 +61,12 @@ export default function ChatWithHigestBidder(
 			product,
 			bid: bidByUser,
 		});
+	};
+	const getUserData = async (userId: string) => {
+		if (!userId) return;
+		const res = await fetch(`/api/users/${userId}`);
+		const data = await res.json();
+		setFrozenUser(data.user);
 	};
 	React.useEffect(() => {
 		checkLogin();
@@ -142,6 +156,14 @@ export default function ChatWithHigestBidder(
 								</div>
 							</div>
 						))}
+						{frozenUser && (
+							<div className="flex flex-col w-full justify-center items-center">
+								<span>Name: {frozenUser.name}</span>
+								<span>Email: {frozenUser.email}</span>
+								<span>Phone: {frozenUser.phone}</span>
+								<span>Hostel: {frozenUser.hostel}</span>{" "}
+							</div>
+						)}
 					</div>
 				</main>
 				<footer className="border-t dark:border-zinc-700 p-4">
