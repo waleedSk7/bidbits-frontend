@@ -10,7 +10,10 @@ export default function Chat() {
 	const [products, setProducts] = React.useState<Product[]>([]);
 	const [selectedId, setSelectedId] = React.useState<number | null>(null);
 	const selectedProduct = useMemo(() => {
-		return products.find((product) => Number(product.productId) === selectedId);
+		if (products)
+			return products.find(
+				(product) => Number(product.productId) === selectedId
+			);
 	}, [selectedId, products]);
 	const [messages, setMessages] = React.useState<Message[]>([]);
 	const [message, setMessage] = React.useState("");
@@ -36,7 +39,6 @@ export default function Chat() {
 			if (selectedProduct.messages) setMessages(selectedProduct.messages);
 			console.log(selectedProduct.messages);
 		}
-		
 	}, [selectedProduct, products]);
 
 	const handleSend = async (e: any) => {

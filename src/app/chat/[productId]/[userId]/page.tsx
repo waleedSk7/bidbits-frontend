@@ -8,7 +8,7 @@ import axios from "axios";
 import * as React from "react";
 
 export interface IChatWithHigestBidderProps {
-	params: { productId: string };
+	params: { productId: string; userId: string };
 }
 async function getProductDataAndMessages(productId: string) {
 	const productRes = await fetch(`/api/products/${productId}`);
@@ -22,23 +22,36 @@ export default function ChatWithHigestBidder(
 	props: IChatWithHigestBidderProps
 ) {
 	const { checkLogin } = useLogin();
-	const [chatProfile, setChatProfile] = React.useState<ProfileChat>();
+	const [chatProfile, setChatProfile] = React.useState<{
+		messages: Message[];
+		product: ProfileChat["product"];
+		bid: number;
+	} | null>();
 	const [message, setMessage] = React.useState("");
 	const fetchMessages = async () => {
 		const res = await fetch("/api/chats/seller/" + props.params.productId, {
 			cache: "no-cache",
 		});
-		const { highestBid, messages, bidder } = await res.json();
-		console.log({ highestBid, messages, bidder });
+		const { bids } = await fetch(`/api/bids/${props.params.userId}`).then(
+			(res) => res.json()
+		);
+		let bidByUser = 0;
+		if (bids.find((bid: any) => bid.productId == props.params.productId)) {
+			bidByUser = bids.find(
+				(bid: any) => bid.productId == props.params.productId
+			).bid;
+		}
 
-		const response = await axios.get(`/api/products/${props.params.productId}`);
-		const { product } = await response.data;
-
+		const { userMessages }: { userMessages: ProfileChat["userMessages"] } =
+			await res.json();
+		const { product } = await fetch(
+			`/api/products/${props.params.productId}`
+		).then((res) => res.json());
+		console.log({ userMessages, product });
 		setChatProfile({
-			product: product,
-			highestBid: highestBid,
-			messages: messages,
-			bidder: bidder,
+			messages: userMessages[Number(props.params.userId)],
+			product,
+			bid: bidByUser,
 		});
 	};
 	React.useEffect(() => {
@@ -84,7 +97,7 @@ export default function ChatWithHigestBidder(
 			body: JSON.stringify({
 				productId: chatProfile.product.productId,
 				message: message,
-				receiverId: chatProfile.bidder.userId,
+				receiverId: props.params.userId,
 			}),
 			cache: "no-cache",
 		});
@@ -97,8 +110,11 @@ export default function ChatWithHigestBidder(
 			<section className="flex flex-col w-full h-full">
 				<header className="border-b dark:border-zinc-700 p-4 flex justify-between">
 					<h2 className="text-xl font-bold">
-						{chatProfile?.product.productName}, bid at Rs.{" "}
-						{chatProfile?.highestBid}
+						{chatProfile?.product.productName},{" "}
+						{chatProfile?.bid !== undefined &&
+							chatProfile?.bid !== 0 &&
+							"bid at Rs." + chatProfile?.bid}
+						{/* {chatProfile?.highestBid} */}
 					</h2>
 					<Button
 						color={"warning"}

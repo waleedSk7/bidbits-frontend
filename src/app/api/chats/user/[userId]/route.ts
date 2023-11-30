@@ -48,6 +48,14 @@ export async function GET(
 				products[message.product.productId] = product;
 			}
 		}
+		for (const product of Object.values(products)) {
+			product.messages = product.messages?.sort((a, b) => {
+				return (
+					new Date(a.timestamp.toString()).getTime() -
+					new Date(b.timestamp.toString()).getTime()
+				);
+			});
+		}
 		return Response.json({
 			products: Object.values(products),
 		});

@@ -3,8 +3,6 @@ import Product from "./product";
 import User from "./user";
 
 export default interface ProfileChat {
-	highestBid: number;
-	messages: Message[];
+	userMessages: Record<User["userId"], Message[]>;
 	product: Product;
-	bidder: User;
 }

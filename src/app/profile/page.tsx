@@ -5,7 +5,6 @@ import User from "@/Types/user";
 import ChatCardProfile from "@/components/ChatCard";
 import ProductCard from "@/components/ProductCard";
 import useLogin from "@/hooks/useLogin";
-import Image from "next/image";
 import React from "react";
 
 const ProfilePage: React.FC = () => {
@@ -14,7 +13,7 @@ const ProfilePage: React.FC = () => {
 		null
 	);
 	const [editValue, setEditValue] = React.useState("");
-	const [chats, setChats] = React.useState<ProfileChat[]>([]);
+	const [productChats, setProductChats] = React.useState<ProfileChat[]>([]);
 	const [user, setUser] = React.useState<User | null>(null);
 
 	const { checkLogin } = useLogin();
@@ -55,7 +54,7 @@ const ProfilePage: React.FC = () => {
 				product,
 			});
 		}
-		setChats(chats);
+		setProductChats(chats);
 		console.log(chats);
 	};
 
@@ -243,10 +242,31 @@ const ProfilePage: React.FC = () => {
 										Chat with bidders here.
 									</p>
 									<div className="flex items-center gap-10 max-h-fit overflow-x-scroll max-w-full">
-										{chats.length > 0 ? (
-											chats.map((chat: any) => (
-												<ChatCardProfile chat={chat} key={chat.chatId} />
-											))
+										{productChats.length > 0 ? (
+											productChats.map(
+												(productChat: ProfileChat) =>
+													productChat.userMessages &&
+													Object.values(productChat.userMessages).length > 0 &&
+													Object.values(productChat.userMessages).map(
+														(user, index) => {
+															// generate a unique hashed name for each user
+															// convert the product name to a number and user id to a number
+															// add them together and take the remainder when divided by the number of names
+
+															return (
+																<ChatCardProfile
+																	product={productChat.product}
+																	name={
+																		"Buyer " +
+																		Object.keys(productChat.userMessages)[index]
+																	}
+																	chat={user}
+																	key={productChat.product.productId}
+																/>
+															);
+														}
+													)
+											)
 										) : (
 											<div className="p-6 space-y-2">
 												<h3 className="text-lg font-semibold">No Chats</h3>

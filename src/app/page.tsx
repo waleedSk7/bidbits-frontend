@@ -20,12 +20,26 @@ export default async function Home() {
 			<div className="flex flex-col min-h-[100vh]">
 				<main className="flex-1">
 					<section className="w-full py-12 sm:py-24 md:py-32 xl:py-48">
-						<div className="container px-4 md:px-6">
+						{/* background image */}
+						<div className="absolute inset-0 -z-10">
+							<Image
+								alt="Background"
+								className=" object-cover"
+								layout="fill"
+								priority
+								src="https://ucarecdn.com/b150e364-bb86-4722-a1df-d7c457b1bc5e/-/preview/500x500/-/quality/smart/-/format/auto/"
+							/>
+							<div
+								className="absolute inset-0 "
+								style={{ mixBlendMode: "multiply" }}
+							></div>
+						</div>
+						<div className="container px-4 md:px-6 z-10 relative">
 							<div className="flex flex-col items-center space-y-4 text-center">
-								<h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
+								<h1 className="text-3xl text-white font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none ">
 									Welcome to BID BITS
 								</h1>
-								<p className="mx-auto max-w-[700px] text-zinc-500 md:text-xl dark:text-zinc-400">
+								<p className="mx-auto max-w-[700px]  text-white md:text-xl dark:text-zinc-400">
 									The best place for BPHC students to auction their products and
 									find great deals.
 								</p>
