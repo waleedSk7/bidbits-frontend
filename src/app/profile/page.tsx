@@ -292,6 +292,9 @@ const ProfilePage: React.FC = () => {
 																		Object.keys(productChat.userMessages)[index]
 																	}
 																	chat={user}
+																	userId={
+																		Object.keys(productChat.userMessages)[index]
+																	}
 																	key={productChat.product.productId}
 																/>
 															);
