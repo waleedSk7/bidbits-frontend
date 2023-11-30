@@ -36,9 +36,9 @@ export default function ChatWithHigestBidder(
 			(res) => res.json()
 		);
 		let bidByUser = 0;
-		if (bids.find((bid: any) => bid.productId == props.params.productId)) {
+		if (bids.find((bid: any) => bid.product.productId == props.params.productId)) {
 			bidByUser = bids.find(
-				(bid: any) => bid.productId == props.params.productId
+				(bid: any) => bid.product.productId == props.params.productId
 			).bid;
 		}
 
@@ -47,7 +47,7 @@ export default function ChatWithHigestBidder(
 		const { product } = await fetch(
 			`/api/products/${props.params.productId}`
 		).then((res) => res.json());
-		console.log({ userMessages, product });
+		console.log({ userMessages, product, bids });
 		setChatProfile({
 			messages: userMessages[Number(props.params.userId)],
 			product,
