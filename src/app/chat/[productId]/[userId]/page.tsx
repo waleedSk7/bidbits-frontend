@@ -116,13 +116,15 @@ export default function ChatWithHigestBidder(
 							"bid at Rs." + chatProfile?.bid}
 						{/* {chatProfile?.highestBid} */}
 					</h2>
-					<Button
-						color={"warning"}
-						disabled={chatProfile?.product.sold}
-						onClick={handleFreeze}
-					>
-						{chatProfile?.product.sold ? "Frozen" : "Freeze"} Bid
-					</Button>
+					{chatProfile?.bid !== undefined && chatProfile?.bid !== 0 && (
+						<Button
+							color={"warning"}
+							disabled={chatProfile?.product.sold}
+							onClick={handleFreeze}
+						>
+							{chatProfile?.product.sold ? "Frozen" : "Freeze"} Bid
+						</Button>
+					)}
 				</header>
 				<main className="flex-1 overflow-auto p-4 h-full">
 					<div className="space-y-4">
