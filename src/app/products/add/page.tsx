@@ -3,7 +3,7 @@ import useLogin from "@/hooks/useLogin";
 import React, { useState } from "react";
 import axios from "axios";
 import { uploadDirect } from "@uploadcare/upload-client";
-
+import categories from "../categories";
 // fileData must be `Blob` or `File` or `Buffer`
 
 const AddProductPage: React.FC = () => {
@@ -20,20 +20,6 @@ const AddProductPage: React.FC = () => {
 	const categoryRef = React.useRef<HTMLSelectElement>(null);
 	const imageRef = React.useRef<HTMLInputElement>(null);
 	const displaImageRef = React.useRef<HTMLImageElement>(null);
-
-	const Categories = [
-		{ id: 1, name: "Clothing & Apparel" },
-		{ id: 2, name: "Footwear & Shoes" },
-		{ id: 3, name: "Electronics & Gadgets" },
-		{ id: 4, name: "Games & Toys" },
-		{ id: 5, name: "Veterinary & Pet Items" },
-		{ id: 6, name: "Stationary & Books" },
-		{ id: 7, name: "Furniture" },
-		{ id: 8, name: "Hand & Power Tools" },
-		{ id: 9, name: "Tupperware" },
-		{ id: 10, name: "Sports Products" },
-		{ id: 11, name: "Others" },
-	];
 
 	const handleAddProduct = async () => {
 		if (
@@ -104,7 +90,7 @@ const AddProductPage: React.FC = () => {
 						ref={categoryRef}
 						className="border border-gray-300 rounded-md p-2 w-full"
 					>
-						{Categories.map((category) => (
+						{categories.map((category) => (
 							<option key={category.id} value={category.name}>
 								{category.name}
 							</option>

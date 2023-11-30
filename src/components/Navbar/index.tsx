@@ -3,15 +3,17 @@ import axios from "axios";
 import Link from "next/link";
 import * as React from "react";
 import LoginButton from "./LoginButton";
-
 export interface IAppProps {}
 
 export default async function Navbar(props: IAppProps) {
 	return (
-		<header className="px-4 lg:px-6 h-14 w-full flex items-center absolute top-0 left-0">
+		<header className="px-4 lg:px-6 h-14 w-full flex items-center absolute top-0 left-0 bg-[#172f39] overflow-hidden shadow">
 			<Link className="flex items-center justify-center" href="/">
-				<IconMountain className="w-6 h-6 mr-2" />
-				<span className="sr-only">BID BITS</span>
+				<img
+					src={"/_next/static/media/logo.e45dd6c4.jpeg"}
+					className="h-16 w-16  mr-2"
+				/>
+				<h1 className="text-2xl font-bold text-white">BID BITS</h1>
 			</Link>
 			<nav className="text-white ml-auto flex gap-4 sm:gap-6">
 				<Link

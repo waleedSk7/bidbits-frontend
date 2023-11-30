@@ -27,7 +27,7 @@ export default async function Home() {
 								className=" object-cover"
 								layout="fill"
 								priority
-								src="https://ucarecdn.com/b150e364-bb86-4722-a1df-d7c457b1bc5e/-/preview/500x500/-/quality/smart/-/format/auto/"
+								src="https://ucarecdn.com/b150e364-bb86-4722-a1df-d7c457b1bc5e/-/quality/smart/-/format/auto/"
 							/>
 							<div
 								className="absolute inset-0 "
