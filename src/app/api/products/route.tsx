@@ -59,7 +59,9 @@ export const PUT = async (request: NextRequest) => {
 	const { userId, productId } = body;
 
 	try {
-		const bids = await axios.get(process.env.backendUrl + "/api/v1/bids/");
+		const bids = await axios.get(
+			process.env.backendUrl + "/api/v1/bids/" + userId
+		);
 		const bidId = bids.data.find(
 			(bid: any) => bid.product.productId == productId
 		).bidId;

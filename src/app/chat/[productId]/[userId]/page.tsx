@@ -83,7 +83,7 @@ export default function ChatWithHigestBidder(
 	const handleFreeze = async () => {
 		try {
 			const response = await axios.put(`/api/products/`, {
-				userId: Number(localStorage.getItem("user")),
+				userId: Number(props.params.userId),
 				productId: props.params.productId,
 			});
 			const data = await response.data;
