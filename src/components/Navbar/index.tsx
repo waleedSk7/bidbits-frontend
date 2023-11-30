@@ -10,8 +10,10 @@ export default async function Navbar(props: IAppProps) {
 		<header className="px-4 lg:px-6 h-14 w-full flex items-center absolute top-0 left-0 bg-[#172f39] overflow-hidden shadow">
 			<Link className="flex items-center justify-center" href="/">
 				<img
-					src={"/_next/static/media/logo.e45dd6c4.jpeg"}
-					className="h-16 w-16  mr-2"
+					src={
+						"https://ucarecdn.com/37c6bf1f-d8c4-43e1-aead-944010929991/-/preview/500x500/-/quality/smart/-/format/auto/"
+					}
+					className="h-16 w-20  mr-2 rounded-full object-contain"
 				/>
 				<h1 className="text-2xl font-bold text-white">BID BITS</h1>
 			</Link>

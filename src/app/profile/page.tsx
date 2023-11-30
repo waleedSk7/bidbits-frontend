@@ -130,7 +130,7 @@ const ProfilePage: React.FC = () => {
 	}, []);
 
 	return (
-		<main className="flex min-h-screen flex-col items-center p-12">
+		<main className="flex min-h-screen flex-col items-center p-12  gap-10">
 			{/* A modal to input campus id and hostel */}
 			{editShown && (
 				<div className="fixed inset-0 z-50 flex items-center justify-center w-screen h-screen bg-black bg-opacity-50">
@@ -192,42 +192,42 @@ const ProfilePage: React.FC = () => {
 									<p className="text-sm text-zinc-500 dark:text-zinc-400">
 										Edit your profile here.
 									</p>
-									<div className="flex flex-col sm:flex-row items-center gap-10 max-h-fit overflow-x-scroll max-w-full">
-										<div className="card border rounded-lg overflow-hidden">
+									<div className=" text-white flex flex-col sm:flex-row items-center  gap-10 max-h-fit overflow-x-scroll max-w-full">
+										<div
+											className=" card border rounded-lg overflow-hidden bg-[#172f39]"
+											onClick={() => handleEdit("hostel")}
+										>
 											<div className="p-6 space-y-2">
 												<h3 className="text-lg font-semibold">
 													Hostel {user.hostel}
 												</h3>
-												<p
-													className="text-sm text-zinc-500 dark:text-zinc-400"
-													onClick={() => handleEdit("hostel")}
-												>
+												<p className="text-sm text-zinc-500 dark:text-zinc-400">
 													Edit your hostel here.
 												</p>
 											</div>
 										</div>
-										<div className="card border rounded-lg overflow-hidden">
+										<div
+											className="card border rounded-lg overflow-hidden bg-[#172f39]"
+											onClick={() => handleEdit("id")}
+										>
 											<div className="p-6 space-y-2">
 												<h3 className="text-lg font-semibold">
 													Campus ID {user.campusID}
 												</h3>
-												<p
-													className="text-sm text-zinc-500 dark:text-zinc-400"
-													onClick={() => handleEdit("id")}
-												>
+												<p className="text-sm text-zinc-500 dark:text-zinc-400">
 													Edit your campus ID here.
 												</p>
 											</div>
 										</div>
-										<div className="card border rounded-lg overflow-hidden">
+										<div
+											className="card border rounded-lg overflow-hidden bg-[#172f39]"
+											onClick={() => handleEdit("phone")}
+										>
 											<div className="p-6 space-y-2">
 												<h3 className="text-lg font-semibold">
 													Phone {user.phone}
 												</h3>
-												<p
-													className="text-sm text-zinc-500 dark:text-zinc-400"
-													onClick={() => handleEdit("phone")}
-												>
+												<p className="text-sm text-zinc-500 dark:text-zinc-400">
 													Edit your phone here.
 												</p>
 											</div>
@@ -267,7 +267,7 @@ const ProfilePage: React.FC = () => {
 										</div>
 									)}
 								</div>
-								<div className="p-6 space-y-2">
+								<div className="p-6 space-y-2 border-t pt-20">
 									<h3 className="text-lg font-semibold">Chats</h3>
 									<p className="text-sm text-zinc-500 dark:text-zinc-400">
 										Chat with bidders here.
