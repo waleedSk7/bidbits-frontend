@@ -9,9 +9,9 @@ import React from "react";
 
 const ProfilePage: React.FC = () => {
 	const [products, setProducts] = React.useState([]);
-	const [editShown, setEditShown] = React.useState<"id" | "hostel" | null>(
-		null
-	);
+	const [editShown, setEditShown] = React.useState<
+		"id" | "hostel" | "phone" | null
+	>(null);
 	const [editValue, setEditValue] = React.useState("");
 	const [productChats, setProductChats] = React.useState<ProfileChat[]>([]);
 	const [user, setUser] = React.useState<User | null>(null);
@@ -58,7 +58,7 @@ const ProfilePage: React.FC = () => {
 		console.log(chats);
 	};
 
-	const handleEdit = (type: "id" | "hostel") => {
+	const handleEdit = (type: "id" | "hostel" | "phone") => {
 		if (user) {
 			setEditShown(type);
 			setEditValue(type === "id" ? user?.campusID : user?.hostel);
@@ -101,6 +101,24 @@ const ProfilePage: React.FC = () => {
 				getUser();
 			} else {
 				alert("Error updating hostel");
+			}
+		} else if (editShown === "phone") {
+			const res = await fetch("/api/user/phone/", {
+				method: "POST",
+				body: JSON.stringify({
+					phone: editValue,
+					userId: localStorage.getItem("user"),
+				}),
+				cache: "no-cache",
+			});
+			const data = await res.json();
+			console.log(data);
+			if (data.phone === editValue) {
+				alert("Phone updated successfully");
+				setEditShown(null);
+				getUser();
+			} else {
+				alert("Error updating phone");
 			}
 		}
 	};
@@ -198,6 +216,19 @@ const ProfilePage: React.FC = () => {
 													onClick={() => handleEdit("id")}
 												>
 													Edit your campus ID here.
+												</p>
+											</div>
+										</div>
+										<div className="card border rounded-lg overflow-hidden">
+											<div className="p-6 space-y-2">
+												<h3 className="text-lg font-semibold">
+													Phone {user.phone}
+												</h3>
+												<p
+													className="text-sm text-zinc-500 dark:text-zinc-400"
+													onClick={() => handleEdit("phone")}
+												>
+													Edit your phone here.
 												</p>
 											</div>
 										</div>

@@ -4,4 +4,5 @@ export default interface User {
 	email: string;
 	hostel: string;
 	campusID: string;
+	phone: string;
 }
