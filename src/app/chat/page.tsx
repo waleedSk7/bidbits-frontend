@@ -95,7 +95,7 @@ export default function Chat() {
 					</div>
 				</div>
 			</aside>
-			<section className="flex flex-col max-w-min ">
+			<section className="flex flex-col w-full">
 				<header className=" dark:border-zinc-700 p-4 z-10 text-white">
 					<h2 className="text-xl font-bold">
 						{selectedProduct

@@ -17,7 +17,7 @@ export default async function Navbar(props: IAppProps) {
 				/>
 				<h1 className="text-2xl font-bold text-white">BID BITS</h1>
 			</Link>
-			<nav className="text-white ml-auto flex gap-4 sm:gap-6">
+			<nav className="text-white ml-auto flex gap-4 sm:gap-6 z-20">
 				<Link
 					className="text-sm font-medium hover:underline underline-offset-4"
 					href="/"
