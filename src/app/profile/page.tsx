@@ -10,7 +10,7 @@ import React from "react";
 const ProfilePage: React.FC = () => {
 	const [products, setProducts] = React.useState([]);
 	const [editShown, setEditShown] = React.useState<
-		"id" | "hostel" | "phone" | null
+		"campusID" | "hostel" | "phone" | null
 	>(null);
 	const [editValue, setEditValue] = React.useState("");
 	const [productChats, setProductChats] = React.useState<ProfileChat[]>([]);
@@ -58,15 +58,15 @@ const ProfilePage: React.FC = () => {
 		console.log(chats);
 	};
 
-	const handleEdit = (type: "id" | "hostel" | "phone") => {
+	const handleEdit = (type: "campusID" | "hostel" | "phone") => {
 		if (user) {
 			setEditShown(type);
-			setEditValue(type === "id" ? user?.campusID : user?.hostel);
+			setEditValue(user[type]);
 		}
 	};
 
 	const handleSave = async () => {
-		if (editShown === "id") {
+		if (editShown === "campusID") {
 			const res = await fetch("/api/user/id/", {
 				method: "POST",
 				body: JSON.stringify({
@@ -208,7 +208,7 @@ const ProfilePage: React.FC = () => {
 										</div>
 										<div
 											className="card border rounded-lg overflow-hidden bg-[#172f39]"
-											onClick={() => handleEdit("id")}
+											onClick={() => handleEdit("campusID")}
 										>
 											<div className="p-6 space-y-2">
 												<h3 className="text-lg font-semibold">

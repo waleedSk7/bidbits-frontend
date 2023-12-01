@@ -14,7 +14,7 @@ export default function ProductCard({
 }) {
 	return (
 		<div
-			className="rounded-md shadow-md overflow-hidden min-w-max bg-[#172f39]"
+			className="rounded-md shadow-md overflow-hidden bg-[#172f39] text-white max-w-[400px]"
 			key={product.productId}
 		>
 			<Image
@@ -25,14 +25,14 @@ export default function ProductCard({
 				src={"https://ucarecdn.com/" + product.image + "/"}
 				style={{
 					aspectRatio: "400/300",
-					objectFit: "cover",
+					objectFit: "contain",
 				}}
 				width="400"
 			/>
 			<div className="p-4">
 				<h3 className="text-lg font-bold">{product.productName}</h3>
-				<p className="text-sm text-gray-500 mt-2">{product.details}</p>
-				<p className="text-sm text-gray-500 mt-2">
+				<p className="text-sm text-white mt-2 ">{product.details}</p>
+				<p className="text-sm text-white mt-2">
 					Starting Bid: Rs. {product.startingBid}
 				</p>
 				{!product.sold && details && (

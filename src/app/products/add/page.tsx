@@ -70,9 +70,9 @@ const AddProductPage: React.FC = () => {
 	};
 
 	return (
-		<div className="max-w-md mx-auto p-4 py-20 min-h-[100vh] fixed">
+		<div className="max-w-md mx-auto p-4 py-20 min-h-[100vh] ">
 			{uploading && (
-				<div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+				<div className="absolute top-0 left-0 fixed w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
 					<div className="bg-white p-4 rounded-md">
 						<h1 className="text-2xl font-bold mb-4">Uploading...</h1>
 						<div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
