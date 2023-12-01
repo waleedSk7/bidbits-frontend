@@ -251,13 +251,13 @@ const ProfilePage: React.FC = () => {
 								<p className="text-sm text-zinc-500 dark:text-zinc-400">
 									View and manage your products here.
 								</p>
-								<div className="flex items-center gap-10 max-h-fit overflow-x-scroll max-w-full">
+								<div className="flex items-center gap-10 max-h-fit overflow-x-scroll max-w-full text-white">
 									{products.length > 0 ? (
 										products.map((product: any) => (
 											<ProductCard product={product} key={product.productId} />
 										))
 									) : (
-										<div className="card border rounded-lg overflow-hidden">
+										<div className="card border rounded-lg overflow-hidden bg-[#172f39]">
 											<div className="p-6 space-y-2">
 												<h3 className="text-lg font-semibold">No Products</h3>
 												<p className="text-sm text-zinc-500 dark:text-zinc-400">

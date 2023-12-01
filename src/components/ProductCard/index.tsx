@@ -14,7 +14,7 @@ export default function ProductCard({
 }) {
 	return (
 		<div
-			className="rounded-md shadow-md overflow-hidden min-w-max"
+			className="rounded-md shadow-md overflow-hidden min-w-max bg-[#172f39]"
 			key={product.productId}
 		>
 			<Image
